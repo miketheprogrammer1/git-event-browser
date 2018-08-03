@@ -1,0 +1,11 @@
+<h2>List of events</h2>
+<div id="selectionBox">
+  <div id="repoOwnerBox"><label>Repository Owner</label> {{input type="text" name="repoOwner" value="miketheprogrammer1"}}</div>
+  <div id="repoNameBox"><label>Repository Name</label> {{input type="text" name="repoName" value="git-event-browser"}}</div>
+  <div id="displayEventsButtonBox"><button {{action 'refreshRepository'}}>Refresh</button></div>
+</div>
+<ul>
+      {{#each model as |event|}}
+      <li>{{event.type}} : {{event.payload.description}}</li>
+      {{/each}}
+</ul>

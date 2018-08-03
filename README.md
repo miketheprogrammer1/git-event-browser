@@ -1,7 +1,10 @@
 # git-event-browser
 
+This application was generated from the Ember CLI. 
+It will provide a mechanism for viewing git events.  
+It's purpose is to demonstrate an understanding of single page web applications and 
+ unit testing frameworks.  
 This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
 
 ## Prerequisites
 
