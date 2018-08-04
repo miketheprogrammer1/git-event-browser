@@ -7,6 +7,6 @@
 <div id="messages">{{model.message}}</div>
 <ul>
       {{#each model.events as |event|}}
-      <li class="eventListing">{{event.type}} : {{event.payload.description}}</li>
+      <li class="eventListing">{{event.type}} : {{event.description}}</li>
       {{/each}}
 </ul>
