@@ -4,8 +4,9 @@
   <div id="repoNameBox"><label>Repository Name</label> {{input type="text" value=repoName name="repoName" placeholder="git-event-browser"}}</div>
   <div id="displayEventsButtonBox"><button class="refresh-click" {{action 'refreshRepository'}}>Refresh</button></div>
 </div>
+<div id="messages">{{model.message}}</div>
 <ul>
-      {{#each model as |event|}}
+      {{#each model.events as |event|}}
       <li class="eventListing">{{event.type}} : {{event.payload.description}}</li>
       {{/each}}
 </ul>
