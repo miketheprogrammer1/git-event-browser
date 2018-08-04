@@ -4,7 +4,7 @@ export default Route.extend({
 
   actions: {
     refreshRepository() {
-      alert('Show the events for miketheprogrammer1/git-event-browser/events');
+      console.debug('Show the events for miketheprogrammer1/git-event-browser/events');
     }
   },
   
