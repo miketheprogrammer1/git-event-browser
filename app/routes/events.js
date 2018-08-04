@@ -1,7 +1,6 @@
 import Route from '@ember/routing/route';
 
 export default Route.extend({
-
   actions: {
     refreshRepository() {
       this.refresh();
@@ -18,6 +17,7 @@ export default Route.extend({
     
     var repoOwner = null;
     var repoName = null;
+    var eventType = null;
     
     if (this.get('controller') == null) {
       /*The page is not ready yet. We cannot retrieve events yet.*/
@@ -26,17 +26,23 @@ export default Route.extend({
     } else {
       repoOwner = this.get('controller').get('repoOwner');
       repoName = this.get('controller').get('repoName');
+      eventType = this.get('controller').get('eventType');
     }
-    if(repoOwner == null || repoOwner === '' || repoName == null || repoName === '') {
+    //Check for blank inputs
+    if(repoOwner == null || repoOwner === '' 
+        || repoName == null || repoName === '') 
+    {
       modelResponse.message = "You must provide a repo owner and a repo name. ";
       return modelResponse; 
     }
     return Ember.$.getJSON('https://api.github.com/repos/' + repoOwner + '/' + repoName + '/events').then((data) => {
        modelResponse.events = [];
        for (var i = 0; i < data.length; i++) {
+          if (eventType == null || eventType === "" || eventType === data[i].type) {
             modelResponse.events.push(convertGithubEventToViewEvent(data[i]));
+          }
        }
-       modelResponse.message = "Displaying " + data.length + " github events";
+       modelResponse.message = "Displaying " + modelResponse.events.length + " matching github events of a possible " + data.length;
        return modelResponse;
     }, function() {
       // on error or rejection
@@ -55,6 +61,8 @@ export default Route.extend({
 var convertGithubEventToViewEvent = function(githubEvent) {
     var eventResponse = {};
     eventResponse.type = githubEvent.type;
+    eventResponse.actor = githubEvent.actor.display_login;
+    eventResponse.timestamp = githubEvent.created_at;
     if (githubEvent.type === "PushEvent") {
         //TODO: We should find a better way of displaying commits.
          //Commit really deserves its own route. When we click on an event 

@@ -2,11 +2,12 @@
 <div id="selectionBox">
   <div id="repoOwnerBox"><label>Repository Owner</label> {{input type="text" value=repoOwner name="repoOwner" placeholder="miketheprogrammer1"}}</div>
   <div id="repoNameBox"><label>Repository Name</label> {{input type="text" value=repoName name="repoName" placeholder="git-event-browser"}}</div>
+  <div id="eventTypeBox"><label>Event Type: </label>{{input type="text" value=eventType name="eventType" placeholder="PushEvent or CreateEvent"}}</div>
   <div id="displayEventsButtonBox"><button class="refresh-click" {{action 'refreshRepository'}}>Refresh</button></div>
 </div>
 <div id="messages">{{model.message}}</div>
 <ul>
       {{#each model.events as |event|}}
-      <li class="eventListing">{{event.type}} : {{event.description}}</li>
+      <li class="eventListing">{{event.type}} : {{event.description}}, by: {{event.actor}} at {{event.timestamp}}</li>
       {{/each}}
 </ul>
