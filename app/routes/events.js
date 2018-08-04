@@ -16,22 +16,20 @@ export default Route.extend({
        "events" : [] 
     };
     
-    console.log("We are retrieving data. ");
     var repoOwner = null;
     var repoName = null;
     
     if (this.get('controller') == null) {
       /*The page is not ready yet. We cannot retrieve events yet.*/
 //      return modelResponse;
-      repoOwner = "miketheprogrammer1";
-      repoName = "git-event-browser";
+      return modelResponse;
     } else {
       repoOwner = this.get('controller').get('repoOwner');
       repoName = this.get('controller').get('repoName');
     }
     if(repoOwner == null || repoOwner === '' || repoName == null || repoName === '') {
-      repoOwner = "miketheprogrammer1";
-      repoName = "git-event-browser";
+      modelResponse.message = "You must provide a repo owner and a repo name. ";
+      return modelResponse; 
     }
     return Ember.$.getJSON('https://api.github.com/repos/' + repoOwner + '/' + repoName + '/events').then((data) => {
        modelResponse.events = [];
@@ -40,6 +38,10 @@ export default Route.extend({
        }
        modelResponse.message = "Displaying " + data.length + " github events";
        return modelResponse;
+    }, function() {
+      // on error or rejection
+      modelResponse.message = "Could not access this repository";
+      return modelResponse;
     });
   }
 
