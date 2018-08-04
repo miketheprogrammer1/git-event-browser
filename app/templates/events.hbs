@@ -1,7 +1,7 @@
 <h2>List of events</h2>
 <div id="selectionBox">
-  <div id="repoOwnerBox"><label>Repository Owner</label> {{input type="text" name="repoOwner" value="miketheprogrammer1"}}</div>
-  <div id="repoNameBox"><label>Repository Name</label> {{input type="text" name="repoName" value="git-event-browser"}}</div>
+  <div id="repoOwnerBox"><label>Repository Owner</label> {{input type="text" value=repoOwner name="repoOwner" placeholder="miketheprogrammer1"}}</div>
+  <div id="repoNameBox"><label>Repository Name</label> {{input type="text" value=repoName name="repoName" placeholder="git-event-browser"}}</div>
   <div id="displayEventsButtonBox"><button class="refresh-click" {{action 'refreshRepository'}}>Refresh</button></div>
 </div>
 <ul>
